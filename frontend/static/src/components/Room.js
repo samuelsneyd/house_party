@@ -13,9 +13,9 @@ export default function Room(props) {
         fetch(`/api/get_room?code=${roomCode}`)
             .then((response) => response.json())
             .then((data) => {
-            setVotes(data.votes_to_skip)
-            setGuestPause(data.guest_can_pause)
-            setHost(data.is_host)
+                setVotes(data.votes_to_skip)
+                setGuestPause(data.guest_can_pause)
+                setHost(data.is_host)
         })
     }
 

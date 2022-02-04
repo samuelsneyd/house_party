@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import {
     Button, Grid, Typography, TextField,
     FormHelperText, FormControl, Radio,
@@ -10,6 +11,7 @@ export default function CreateRoomPage(props) {
     const defaultVotes = 2;
     const [guestCanPause, setGuestPause] = useState(true);
     const [votesToSkip, setVotesToSkip] = useState(defaultVotes);
+    const navigate = useNavigate();
 
     const handleVotesChange = (e) => {
         setVotesToSkip(e.target.value);
@@ -30,8 +32,7 @@ export default function CreateRoomPage(props) {
         };
         const response = await fetch('/api/create', requestOptions);
         const data = await response.json();
-        console.log(data);
-        props.history.push(`/room/${data.code}`);
+        navigate(`/room/${data.code}`);
     };
 
     return (
