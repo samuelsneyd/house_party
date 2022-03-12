@@ -9,22 +9,24 @@ import Room from './Room';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<HomePage/>}/>
-        <Route path="join" element={<JoinRoomPage/>}/>
-        <Route path="create" element={<CreateRoomPage/>}/>
-        <Route path="room/:roomCode" element={<Room/>}/>
-        <Route
-          path="*"
-          element={
-            <main style={{padding: "1rem"}}>
-              <p>There's nothing here!</p>
-            </main>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div className="center">
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<HomePage/>}/>
+          <Route path="join" element={<JoinRoomPage/>}/>
+          <Route path="create" element={<CreateRoomPage/>}/>
+          <Route path="room/:roomCode" element={<Room/>}/>
+          <Route
+            path="*"
+            element={
+              <main style={{padding: "1rem"}}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

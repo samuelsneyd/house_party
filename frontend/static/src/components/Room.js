@@ -5,12 +5,12 @@ export default function Room() {
   const [votesToSkip, setVotes] = useState(2);
   const [guestCanPause, setGuestPause] = useState(false);
   const [isHost, setHost] = useState(false);
-  const {roomCode} = useParams();
+  const { roomCode } = useParams();
   const testFunc = () => {
     console.log(roomCode);
   };
   const getRoomDetails = () => {
-    fetch(`/api/get_room?code=${roomCode}`)
+    fetch(`/api/get-room?code=${roomCode}`)
       .then((response) => response.json())
       .then((data) => {
         setVotes(data.votes_to_skip);
