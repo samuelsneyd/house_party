@@ -16,9 +16,11 @@ export default function CreateRoomPage() {
   const handleVotesChange = (e) => {
     setVotesToSkip(e.target.value);
   };
+
   const handleGuestCanPauseChange = (e) => {
     setGuestPause(e.target.value === 'true');
   };
+
   const handleRoomButtonClicked = async () => {
     const requestOptions = {
       method: 'POST',
@@ -30,16 +32,18 @@ export default function CreateRoomPage() {
         guest_can_pause: guestCanPause
       })
     };
-    const response = await fetch('/api/create', requestOptions);
-    const data = await response.json();
-    navigate(`/room/${data.code}`);
+    fetch('/api/create', requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        navigate(`/room/${data.code}`);
+      });
   };
 
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} align={'center'}>
         <Typography component={'h4'} variant={'h4'}>
-          Create A Room
+          Create Room
         </Typography>
       </Grid>
       <Grid item xs={12} align={'center'}>
@@ -75,7 +79,7 @@ export default function CreateRoomPage() {
             defaultValue={defaultVotes}
             inputProps={{
               min: 1,
-              style: {textAlign: 'center'}
+              style: { textAlign: 'center' }
             }}
           />
           <FormHelperText component={'div'}>
@@ -91,7 +95,7 @@ export default function CreateRoomPage() {
           variant={'contained'}
           onClick={handleRoomButtonClicked}
         >
-          Create A Room
+          Create Room
         </Button>
       </Grid>
       <Grid item xs={12} align={'center'}>

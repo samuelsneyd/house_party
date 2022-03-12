@@ -9,17 +9,17 @@ import Room from './Room';
 
 export default function App() {
   return (
-    <div className="center">
+    <div className='center'>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<HomePage/>}/>
-          <Route path="join" element={<JoinRoomPage/>}/>
-          <Route path="create" element={<CreateRoomPage/>}/>
-          <Route path="room/:roomCode" element={<Room/>}/>
+          <Route exact path='/' element={<HomePage/>}/>
+          <Route path='join' element={<JoinRoomPage/>}/>
+          <Route path='create' element={<CreateRoomPage/>}/>
+          <Route path='room/:roomCode' element={<Room/>}/>
           <Route
-            path="*"
+            path='*'
             element={
-              <main style={{padding: "1rem"}}>
+              <main style={{ padding: '1rem' }}>
                 <p>There's nothing here!</p>
               </main>
             }
