@@ -3,7 +3,6 @@ import { TextField, Button, Grid, Typography } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
-
 export default function JoinRoomPage() {
   const [roomCode, setRoomCode] = useState('');
   const [error, setError] = useState('');

@@ -32,7 +32,7 @@ export default function CreateRoomPage() {
         guest_can_pause: guestCanPause
       })
     };
-    fetch('/api/create', requestOptions)
+    fetch('/api/create-room', requestOptions)
       .then((response) => response.json())
       .then((data) => {
         navigate(`/room/${data.code}`);

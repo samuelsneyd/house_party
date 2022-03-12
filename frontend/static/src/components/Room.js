@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Grid, Button, Typography } from '@material-ui/core';
+import CreateRoomPage from './CreateRoomPage';
 
 export default function Room() {
   const [votesToSkip, setVotes] = useState(2);
   const [guestCanPause, setGuestPause] = useState(false);
   const [isHost, setHost] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const { roomCode } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     getRoomDetails();
-    return () => {};
+    return () => {
+    };
   }, []);
 
   const getRoomDetails = () => {
@@ -32,6 +35,44 @@ export default function Room() {
       });
   };
 
+  const renderSettingsButton = () => {
+    return (
+      <Grid item xs={12} align={'center'}>
+        <Button
+          variant={'contained'}
+          color={'primary'}
+          onClick={() => setShowSettings(true)}
+        >
+          Settings
+        </Button>
+      </Grid>
+    );
+  };
+
+  const renderSettings = () => {
+    return (
+      <Grid container spacing={1}>
+        <Grid item xs={12} align={'center'}>
+          <CreateRoomPage
+            update={true}
+            votesToSkip={votesToSkip}
+            guestCanPause={guestCanPause}
+            roomCode={roomCode}
+            updateCallback={''}
+          />
+        </Grid>
+        <Grid item xs={12} align={'center'}>
+          <Button
+            variant={'contained'}
+            color={'secondary'}
+            onClick={() => setShowSettings(false)}
+          >
+            Close
+          </Button> </Grid>
+      </Grid>
+    );
+  };
+
   const leaveRoom = () => {
     const options = {
       method: 'POST',
@@ -42,6 +83,10 @@ export default function Room() {
         navigate('/');
       });
   };
+
+  if (showSettings) {
+    return renderSettings();
+  }
 
   return (
     <Grid container spacing={1}>
@@ -66,10 +111,12 @@ export default function Room() {
         </Typography>
       </Grid>
       <Grid item xs={12} align={'center'}>
+        {isHost ? renderSettingsButton() : null}
+      </Grid>
+      <Grid item xs={12} align={'center'}>
         <Button
           variant={'contained'}
           color={'secondary'}
-          to={'/'}
           onClick={leaveRoom}
         >
           Leave Room
