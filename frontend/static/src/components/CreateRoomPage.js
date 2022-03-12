@@ -21,7 +21,7 @@ export default function CreateRoomPage() {
     setGuestPause(e.target.value === 'true');
   };
 
-  const handleRoomButtonClicked = async () => {
+  const handleRoomButtonClicked = () => {
     const requestOptions = {
       method: 'POST',
       headers: {
