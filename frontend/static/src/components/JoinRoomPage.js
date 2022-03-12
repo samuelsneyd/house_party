@@ -14,7 +14,20 @@ export default function JoinRoomPage() {
   };
 
   const enterRoom = () => {
-    console.log(roomCode);
+    const options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({code: roomCode})
+    };
+    fetch('/api/join-room', options).then((response) => {
+      if (response.ok) {
+        navigate(`/room/${roomCode}`);
+      } else {
+        setError('Room not found');
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
   };
 
   return (
