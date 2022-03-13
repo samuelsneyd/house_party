@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from decouple import config
 
-# Create your views here.
+SPOTIFY = {
+    "CLIENT_ID": config("SPOTIFY_CLIENT_ID"),
+    "CLIENT_SECRET": config("SPOTIFY_CLIENT_SECRET"),
+    "RETURN_URI": "",
+}

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import environ
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-p3noicjv(p+*jgm%47ay)vxxoyp36kgeg%0tcmx9y(v3_kpj^)"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = []
 
@@ -125,14 +125,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Initialize environment variables
-
-env = environ.Env()
-environ.Env.read_env()
-
-SPOTIFY = {
-    "CLIENT_ID": env("SPOTIFY_CLIENT_ID"),
-    "CLIENT_SECRET": env("SPOTIFY_CLIENT_SECRET"),
-    "REDIRECT_URI": "",
-}
