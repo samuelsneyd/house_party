@@ -26,9 +26,9 @@ export default function Room() {
         return response.json();
       })
       .then((data) => {
-        setVotes(data.votes_to_skip || '');
-        setGuestPause(data.guest_can_pause || '');
-        setHost(data.is_host || '');
+        setVotes(data.votes_to_skip ?? '');
+        setGuestPause(data.guest_can_pause ?? false);
+        setHost(data.is_host ?? false);
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +58,7 @@ export default function Room() {
             votesToSkip={votesToSkip}
             guestCanPause={guestCanPause}
             roomCode={roomCode}
-            updateCallback={''}
+            updateCallback={getRoomDetails}
           />
         </Grid>
         <Grid item xs={12} align={'center'}>
