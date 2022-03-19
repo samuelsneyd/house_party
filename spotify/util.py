@@ -1,7 +1,7 @@
 from django.utils import timezone
 from datetime import timedelta
 from requests import post, put, get
-from .models import SpotifyToken
+from .models import SpotifyToken, Vote
 from .credentials import SpotifyCreds
 
 BASE_URL = "https://api.spotify.com/v1/me/"
@@ -107,3 +107,16 @@ def pause_song(session_id):
 
 def play_song(session_id):
     return execute_spotify_api_request(session_id, "player/play", put_=True)
+
+
+def skip_song(session_id):
+    return execute_spotify_api_request(session_id, "player/next", post_=True)
+
+
+def update_room_song(room, song_id):
+    current_song = room.current_song
+
+    if current_song != song_id:
+        room.current_song = song_id
+        room.save(update_fields=["current_song"])
+        votes = Vote.objects.filter(room=room).delete()
