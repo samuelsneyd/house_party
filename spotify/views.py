@@ -8,6 +8,8 @@ from .util import (
     create_update_user_tokens,
     is_spotify_authenticated,
     execute_spotify_api_request,
+    play_song,
+    pause_song,
 )
 from .credentials import SpotifyCreds
 
@@ -120,3 +122,35 @@ class CurrentSong(APIView):
         }
 
         return Response(song, status=status.HTTP_200_OK)
+
+
+class PauseSong(APIView):
+    def put(self, response, format=None):
+        room_code = self.request.session.get("room_code")
+        room = Room.objects.filter(code=room_code)
+
+        if room.exists():
+            room = room[0]
+
+        if self.request.session.session_key == room.host or room.guest_can_pause:
+            pause_song(room.host)
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        else:
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
+
+
+class PlaySong(APIView):
+    def put(self, response, format=None):
+        room_code = self.request.session.get("room_code")
+        room = Room.objects.filter(code=room_code)
+
+        if room.exists():
+            room = room[0]
+
+        if self.request.session.session_key == room.host or room.guest_can_pause:
+            play_song(room.host)
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        else:
+            return Response({}, status=status.HTTP_403_FORBIDDEN)

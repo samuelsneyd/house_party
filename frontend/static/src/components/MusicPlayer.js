@@ -10,6 +10,24 @@ function MusicPlayer(props) {
     };
   }, []);
 
+  const pauseSong = () => {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/spotify/pause', options)
+      .catch((error) => console.log(error));
+  };
+
+  const playSong = () => {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/spotify/play', options)
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Card>
       <Grid container alignItems={'center'}>
@@ -24,7 +42,9 @@ function MusicPlayer(props) {
             {props.artist}
           </Typography>
           <div>
-            <IconButton>
+            <IconButton onClick={() => {
+              props.is_playing ? pauseSong() : playSong();
+            }}>
               {props.is_playing ? <Pause/> : <PlayArrow/>}
             </IconButton>
             <IconButton>
