@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Grid, Button, Typography } from '@material-ui/core';
 import CreateRoomPage from './CreateRoomPage';
+import MusicPlayer from './MusicPlayer';
 
 export default function Room() {
   const [votesToSkip, setVotes] = useState(2);
@@ -15,7 +16,7 @@ export default function Room() {
 
   useEffect(() => {
     getRoomDetails();
-    const interval = setInterval(getCurrentSong, 3000);
+    const interval = setInterval(getCurrentSong, 1000);
     return () => {
       clearInterval(interval);
     };
@@ -124,8 +125,8 @@ export default function Room() {
           Code: {roomCode}
         </Typography>
       </Grid>
+      <MusicPlayer {...currentSong}/>
       <Grid item xs={12} align={'center'}>
-        <div>{currentSong.title}</div>
         {isHost ? renderSettingsButton() : null}
       </Grid>
       <Grid item xs={12} align={'center'}>
@@ -140,19 +141,3 @@ export default function Room() {
     </Grid>
   );
 }
-
-// <Grid item xs={12} align={'center'}>
-//   <Typography variant={'h6'} component={'h6'}>
-//     Votes: {votesToSkip}
-//   </Typography>
-// </Grid>
-// <Grid item xs={12} align={'center'}>
-//   <Typography variant={'h6'} component={'h6'}>
-//     Guest can pause: {guestCanPause.toString()}
-//   </Typography>
-// </Grid>
-// <Grid item xs={12} align={'center'}>
-//   <Typography variant={'h6'} component={'h6'}>
-//     Host: {isHost.toString()}
-//   </Typography>
-// </Grid>

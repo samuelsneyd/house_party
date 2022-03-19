@@ -9,16 +9,9 @@ import {
 import { Alert } from '@material-ui/lab';
 
 export default function CreateRoomPage(props) {
-  const defaultProps = {
-    votesToSkip: 2,
-    guestCanPause: true,
-    update: false,
-    roomCode: null
-  };
-
-  const [update] = useState(props.update ?? defaultProps.update);
-  const [guestCanPause, setGuestPause] = useState(props.guestCanPause ?? defaultProps.guestCanPause);
-  const [votesToSkip, setVotesToSkip] = useState(props.votesToSkip ?? defaultProps.votesToSkip);
+  const [update] = useState(props.update ?? false);
+  const [guestCanPause, setGuestPause] = useState(props.guestCanPause ?? true);
+  const [votesToSkip, setVotesToSkip] = useState(props.votesToSkip ?? 2);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
