@@ -9,12 +9,15 @@ export default function Room() {
   const [isHost, setHost] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [spotifyAuth, setSpotifyAuth] = useState(false);
+  const [currentSong, setCurrentSong] = useState({});
   const { roomCode } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     getRoomDetails();
+    const interval = setInterval(getCurrentSong, 3000);
     return () => {
+      clearInterval(interval);
     };
   }, []);
 
@@ -52,6 +55,13 @@ export default function Room() {
             });
         }
       });
+  };
+
+  const getCurrentSong = () => {
+    fetch('/spotify/current-song')
+      .then((response) => response.ok ? response.json() : {})
+      .then((data) => setCurrentSong(data))
+      .catch((error) => console.log(error));
   };
 
   const renderSettingsButton = () => {
@@ -115,21 +125,7 @@ export default function Room() {
         </Typography>
       </Grid>
       <Grid item xs={12} align={'center'}>
-        <Typography variant={'h6'} component={'h6'}>
-          Votes: {votesToSkip}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} align={'center'}>
-        <Typography variant={'h6'} component={'h6'}>
-          Guest can pause: {guestCanPause.toString()}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} align={'center'}>
-        <Typography variant={'h6'} component={'h6'}>
-          Host: {isHost.toString()}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} align={'center'}>
+        <div>{currentSong.title}</div>
         {isHost ? renderSettingsButton() : null}
       </Grid>
       <Grid item xs={12} align={'center'}>
@@ -144,3 +140,19 @@ export default function Room() {
     </Grid>
   );
 }
+
+// <Grid item xs={12} align={'center'}>
+//   <Typography variant={'h6'} component={'h6'}>
+//     Votes: {votesToSkip}
+//   </Typography>
+// </Grid>
+// <Grid item xs={12} align={'center'}>
+//   <Typography variant={'h6'} component={'h6'}>
+//     Guest can pause: {guestCanPause.toString()}
+//   </Typography>
+// </Grid>
+// <Grid item xs={12} align={'center'}>
+//   <Typography variant={'h6'} component={'h6'}>
+//     Host: {isHost.toString()}
+//   </Typography>
+// </Grid>

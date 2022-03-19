@@ -78,7 +78,6 @@ class IsAuthenticated(APIView):
 class CurrentSong(APIView):
     def get(self, request, format=None):
         room_code = self.request.session.get("room_code")
-        print("room code", room_code)
         room = Room.objects.filter(code=room_code)
         if room.exists():
             room = room[0]
