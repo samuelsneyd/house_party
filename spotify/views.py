@@ -34,7 +34,7 @@ class AuthURL(APIView):
 
 def spotify_callback(request, format=None):
     code = request.GET.get("code")
-    error = request.GET.get("error")
+    request_error = request.GET.get("error")
 
     response = post(
         "https://accounts.spotify.com/api/token",
@@ -51,4 +51,4 @@ def spotify_callback(request, format=None):
     token_type = response.get("token_type")
     refresh_token = response.get("refresh_token")
     expires_in = response.get("expires_in")
-    error = response.get("error")
+    response_error = response.get("error")
