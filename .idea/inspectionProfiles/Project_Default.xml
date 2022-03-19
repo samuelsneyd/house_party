@@ -1,11 +1,15 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredIdentifiers">
         <list>
           <option value="commerce.auctions.models.Listing.objects" />
           <option value="django.http.request.HttpRequest.user" />
+          <option value="api.models.Room.objects" />
+          <option value="commerce.auctions.models.Category.objects" />
+          <option value="commerce.auctions.models.Bid.objects" />
         </list>
       </option>
     </inspection_tool>
