@@ -38,10 +38,15 @@ function MusicPlayer(props) {
   };
 
   return (
-    <Card>
+    <Card className={'gradient'}>
       <Grid container alignItems={'center'}>
         <Grid item align={'center'} xs={4}>
-          <img src={props.image_url} height={'100%'} width={'100%'}/>
+          <img
+            src={props.image_url}
+            height={'100%'}
+            width={'100%'}
+            alt={'Album cover'}
+          />
         </Grid>
         <Grid item align={'center'} xs={8}>
           <Typography component={'h5'} variant={'h5'}>
@@ -59,7 +64,7 @@ function MusicPlayer(props) {
             <IconButton onClick={skipSong}>
               <SkipNext/>
               <Typography color={'textSecondary'} variant={'subtitle2'}>
-                {props.votes}{"/"}{props.votes_required}
+                {props.votes}{'/'}{props.votes_required}
               </Typography>
             </IconButton>
           </div>
