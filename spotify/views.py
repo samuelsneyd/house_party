@@ -16,7 +16,7 @@ class AuthURL(APIView):
                 "https://accounts.spotify.com/authorize",
                 params={
                     "scope": scopes,
-                    "response-type": "code",
+                    "response_type": "code",
                     "redirect_uri": SpotifyCreds.REDIRECT_URI,
                     "client_id": SpotifyCreds.CLIENT_ID,
                 },

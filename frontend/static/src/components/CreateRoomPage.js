@@ -118,7 +118,7 @@ export default function CreateRoomPage(props) {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} align={'center'}>
-        <Collapse in={errorMessage || successMessage}>
+        <Collapse in={!!(errorMessage || successMessage)}>
           {
             errorMessage
               ? <Alert
@@ -145,7 +145,7 @@ export default function CreateRoomPage(props) {
           <FormHelperText component={'div'}>
             <div align={'center'}>Guest Playback Controls</div>
             <RadioGroup
-              row defaultValue={guestCanPause.toString()}
+              row value={guestCanPause.toString()}
               onChange={handleGuestCanPauseChange}
             >
               <FormControlLabel
