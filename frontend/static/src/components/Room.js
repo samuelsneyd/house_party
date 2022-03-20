@@ -9,7 +9,6 @@ export default function Room() {
   const [guestCanPause, setGuestPause] = useState(false);
   const [isHost, setHost] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [spotifyAuth, setSpotifyAuth] = useState(false);
   const [currentSong, setCurrentSong] = useState({});
   const { roomCode } = useParams();
   const navigate = useNavigate();
@@ -47,7 +46,6 @@ export default function Room() {
     fetch('/spotify/is-authenticated')
       .then((response) => response.json())
       .then((data) => {
-        setSpotifyAuth(data.status);
         if (!data.status) {
           fetch('/spotify/get-auth-url')
             .then((response) => response.json())
