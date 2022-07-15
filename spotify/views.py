@@ -18,7 +18,7 @@ from .util import (
 
 
 class AuthURL(APIView):
-    def get(self, request, format=None):
+    def get(self, request):
         scopes = "user-read-playback-state user-modify-playback-state user-read-currently-playing"
         url = (
             Request(
@@ -38,7 +38,7 @@ class AuthURL(APIView):
         return Response({"url": url}, status=status.HTTP_200_OK)
 
 
-def spotify_callback(request, format=None):
+def spotify_callback(request):
     code = request.GET.get("code")
     request_error = request.GET.get("error")
 
@@ -74,14 +74,14 @@ def spotify_callback(request, format=None):
 
 
 class IsAuthenticated(APIView):
-    def get(self, request, format=None):
+    def get(self, request):
         is_authenticated = is_spotify_authenticated(self.request.session.session_key)
 
         return Response({"status": is_authenticated}, status=status.HTTP_200_OK)
 
 
 class CurrentSong(APIView):
-    def get(self, request, format=None):
+    def get(self, request):
         room_code = self.request.session.get("room_code")
         room = Room.objects.filter(code=room_code)
         if room.exists():
@@ -132,7 +132,7 @@ class CurrentSong(APIView):
 
 
 class PauseSong(APIView):
-    def put(self, response, format=None):
+    def put(self, response):
         room_code = self.request.session.get("room_code")
         room = Room.objects.filter(code=room_code)
         if room.exists():
@@ -145,7 +145,7 @@ class PauseSong(APIView):
 
 
 class PlaySong(APIView):
-    def put(self, response, format=None):
+    def put(self, response):
         room_code = self.request.session.get("room_code")
         room = Room.objects.filter(code=room_code)
         if room.exists():
@@ -158,7 +158,7 @@ class PlaySong(APIView):
 
 
 class SkipSong(APIView):
-    def post(self, request, format=None):
+    def post(self, request):
         room_code = self.request.session.get("room_code")
         room = Room.objects.filter(code=room_code)
         if room.exists():
