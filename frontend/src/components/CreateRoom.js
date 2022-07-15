@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-export default function CreateRoomPage(props) {
+const CreateRoom = props => {
   const [update] = useState(props.update ?? false);
   const [guestCanPause, setGuestPause] = useState(props.guestCanPause ?? true);
   const [votesToSkip, setVotesToSkip] = useState(props.votesToSkip ?? 2);
@@ -18,13 +18,8 @@ export default function CreateRoomPage(props) {
   const navigate = useNavigate();
   const title = props.update ? 'Update Room' : 'Create Room';
 
-  const handleVotesChange = (e) => {
-    setVotesToSkip(e.target.value);
-  };
-
-  const handleGuestCanPauseChange = (e) => {
-    setGuestPause(e.target.value === 'true');
-  };
+  const handleVotesChange = (e) => setVotesToSkip(e.target.value);
+  const handleGuestCanPauseChange = (e) => setGuestPause(e.target.value === 'true');
 
   const createRoom = () => {
     const options = {
@@ -143,13 +138,13 @@ export default function CreateRoomPage(props) {
             >
               <FormControlLabel
                 value={'true'}
-                control={<Radio color="primary"/>}
+                control={<Radio color="primary" />}
                 label={'Play/Pause'}
                 labelPlacement={'bottom'}
               />
               <FormControlLabel
                 value={'false'}
-                control={<Radio color="secondary"/>}
+                control={<Radio color="secondary" />}
                 label={'No Control'}
                 labelPlacement={'bottom'}
               />
@@ -179,4 +174,6 @@ export default function CreateRoomPage(props) {
       {update ? renderUpdateButtons() : renderCreateButtons()}
     </Grid>
   );
-}
+};
+
+export default CreateRoom;

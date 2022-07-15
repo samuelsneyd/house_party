@@ -3,7 +3,7 @@ import { Grid, Button, ButtonGroup, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
-export default function HomePage() {
+const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,11 +41,11 @@ export default function HomePage() {
         </ButtonGroup>
       </Grid>
       <Grid item xs={12} align={'center'}>
-
       </Grid>
       <Grid item xs={12} align={'center'}>
-
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Home;

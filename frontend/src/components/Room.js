@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Grid, Button, Typography } from '@material-ui/core';
-import CreateRoomPage from './CreateRoomPage';
+import CreateRoom from './CreateRoom';
 import MusicPlayer from './MusicPlayer';
 
-export default function Room() {
+const Room = () => {
   const [votesToSkip, setVotes] = useState(2);
   const [guestCanPause, setGuestPause] = useState(false);
   const [isHost, setHost] = useState(false);
@@ -15,6 +15,7 @@ export default function Room() {
 
   useEffect(() => {
     getRoomDetails();
+    getCurrentSong();
     const interval = setInterval(getCurrentSong, 1000);
     return () => {
       clearInterval(interval);
@@ -81,7 +82,7 @@ export default function Room() {
     return (
       <Grid container spacing={1}>
         <Grid item xs={12} align={'center'}>
-          <CreateRoomPage
+          <CreateRoom
             update={true}
             votesToSkip={votesToSkip}
             guestCanPause={guestCanPause}
@@ -123,7 +124,7 @@ export default function Room() {
           Code: {roomCode}
         </Typography>
       </Grid>
-      <MusicPlayer {...currentSong}/>
+      <MusicPlayer {...currentSong} />
       <Grid item xs={12} align={'center'}>
         {isHost ? renderSettingsButton() : null}
       </Grid>
@@ -138,4 +139,6 @@ export default function Room() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Room;

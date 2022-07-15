@@ -1,5 +1,9 @@
+import React from 'react';
+import { render } from 'react-dom';
 import App from './components/App';
 
+const appDiv = document.getElementById('app');
+render(<App />, appDiv);
 
 const colors = [
   [62, 35, 255],
@@ -11,14 +15,14 @@ const colors = [
 ];
 
 let step = 0;
-// color table indices for:
-// current color left
-// next color left
-// current color right
-// next color right
+// Color table indices for:
+// Current color left
+// Next color left
+// Current color right
+// Next color right
 const colorIndices = [0, 1, 2, 3];
 
-//transition speed
+// Transition speed
 const gradientSpeed = 0.002;
 
 function updateGradient() {
@@ -59,11 +63,10 @@ function updateGradient() {
     colorIndices[0] = colorIndices[1];
     colorIndices[2] = colorIndices[3];
 
-    //pick two new target color indices
-    //do not pick the same as the current one
+    // Pick two new target color indices
+    // Do not pick the same as the current one
     colorIndices[1] = (colorIndices[1] + Math.floor(1 + Math.random() * (colors.length - 1))) % colors.length;
     colorIndices[3] = (colorIndices[3] + Math.floor(1 + Math.random() * (colors.length - 1))) % colors.length;
-
   }
 }
 

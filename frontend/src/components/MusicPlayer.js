@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Grid, Typography, Card, IconButton, LinearProgress } from '@material-ui/core';
 import { PlayArrow, SkipNext, Pause } from '@material-ui/icons';
 
-function MusicPlayer(props) {
-  const songProgress = (props.progress / props.duration) * 100;
-
-  useEffect(() => {
-    return () => {
-    };
-  }, []);
+const MusicPlayer = props => {
+  const {
+    is_playing,
+    image_url,
+    votes,
+    votes_required,
+    progress,
+    duration,
+    title,
+    artist
+  } = props;
+  const songProgress = (progress / duration) * 100;
 
   const pauseSong = () => {
     const options = {
@@ -42,7 +47,7 @@ function MusicPlayer(props) {
       <Grid container alignItems={'center'}>
         <Grid item align={'center'} xs={4}>
           <img
-            src={props.image_url}
+            src={image_url}
             height={'100%'}
             width={'100%'}
             alt={'Album cover'}
@@ -50,29 +55,33 @@ function MusicPlayer(props) {
         </Grid>
         <Grid item align={'center'} xs={8}>
           <Typography component={'h5'} variant={'h5'}>
-            {props.title}
+            {title}
           </Typography>
           <Typography color={'textSecondary'} variant={'subtitle1'}>
-            {props.artist}
+            {artist}
           </Typography>
           <div>
             <IconButton onClick={() => {
-              props.is_playing ? pauseSong() : playSong();
+              is_playing ? pauseSong() : playSong();
             }}>
-              {props.is_playing ? <Pause/> : <PlayArrow/>}
+              {is_playing ? <Pause /> : <PlayArrow />}
             </IconButton>
             <IconButton onClick={skipSong}>
-              <SkipNext/>
+              <SkipNext />
               <Typography color={'textSecondary'} variant={'subtitle2'}>
-                {props.votes}{'/'}{props.votes_required}
+                {votes}{'/'}{votes_required}
               </Typography>
             </IconButton>
           </div>
         </Grid>
       </Grid>
-      <LinearProgress variant={'determinate'} value={songProgress}/>
+      <LinearProgress
+        variant={'determinate'}
+        value={songProgress}
+        transition
+      />
     </Card>
   );
-}
+};
 
 export default MusicPlayer;

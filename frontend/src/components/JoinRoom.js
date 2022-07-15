@@ -3,7 +3,7 @@ import { TextField, Button, Grid, Typography } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
-export default function JoinRoomPage() {
+const JoinRoom = () => {
   const [roomCode, setRoomCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -34,36 +34,36 @@ export default function JoinRoomPage() {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12} align='center'>
-        <Typography variant='h4' component='h4'>
+      <Grid item xs={12} align="center">
+        <Typography variant="h4" component="h4">
           Join Room
         </Typography>
       </Grid>
-      <Grid item xs={12} align='center'>
+      <Grid item xs={12} align="center">
         <TextField
           error={!!error}
-          label='Code'
-          placeholder='Enter a room code'
+          label="Code"
+          placeholder="Enter a room code"
           value={roomCode}
           helperText={error}
-          variant='outlined'
+          variant="outlined"
           onChange={handleTextFieldChange}
         />
       </Grid>
-      <Grid item xs={12} align='center'>
+      <Grid item xs={12} align="center">
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={enterRoom}
         >
           Enter Room
         </Button>
       </Grid>
-      <Grid item xs={12} align='center'>
+      <Grid item xs={12} align="center">
         <Button
-          color='secondary'
-          variant='contained'
-          to='/'
+          color="secondary"
+          variant="contained"
+          to="/"
           component={Link}
         >
           Back
@@ -71,4 +71,6 @@ export default function JoinRoomPage() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default JoinRoom;
